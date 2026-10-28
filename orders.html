@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>My Orders — Buy &amp; Bye</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<!-- Buyer navigation: links sa profile, search, cart, orders, at logout. -->
+<div class="topbar">
+  <div class="container">
+    <a href="orders.html">Track My Orders</a>
+    <a href="account.html">My Profile</a>
+    <button type="button" class="topbar-action" data-logout>Sign out</button>
+  </div>
+</div>
+
+<header class="navbar">
+  <div class="container">
+    <a href="index.html" class="logo">Buy &amp; Bye<span class="brand-byline">by Jasper Clarence</span></a>
+    <form class="search-form" id="searchForm">
+      <input type="text" id="searchInput" placeholder="Search products, brands, and more" autocomplete="off" />
+      <button type="submit" aria-label="Search"><i data-lucide="search"></i></button>
+    </form>
+    <div class="nav-icons">
+      <a href="cart.html" class="cart-link" aria-label="Cart">
+        <i data-lucide="shopping-cart"></i>
+        <span class="cart-badge" id="cartBadge">0</span>
+      </a>
+      <a href="orders.html" class="nav-text-link">My Orders</a>
+    </div>
+  </div>
+</header>
+
+<main class="page">
+  <div class="container">
+    <h2 class="section-title">My Orders</h2>
+    <p style="color:#757575; font-size:13px; margin:-10px 0 16px;">
+      Orders placed from this browser. Status is updated live by the seller.
+    </p>
+
+    <!-- Dito ilalagay ng script.js ang order cards. -->
+    <div id="ordersList"></div>
+
+    <!-- Ipakita ito kapag wala pang order ang buyer. -->
+    <div class="empty-state" id="ordersEmptyState" style="display:none;">
+      <div class="icon"><i data-lucide="package-open"></i></div>
+      <p>You haven't placed any orders yet.</p>
+      <br />
+      <a href="index.html" class="btn btn-primary">Start Shopping</a>
+    </div>
+  </div>
+</main>
+
+<footer class="site-footer">
+  Buy &amp; Bye — a front-end only demo store. Not a real e-commerce platform.
+</footer>
+
+<!-- I-load ang icons, shared data, at buyer-side page behavior. -->
+<script src="https://unpkg.com/lucide@latest"></script>
+<script src="store.js"></script>
+<script src="script.js"></script>
+</body>
+</html>

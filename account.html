@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>My Profile — Buy &amp; Bye</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<!-- Profile navigation: balik sa shop, orders, at logout. -->
+<div class="topbar">
+  <div class="container">
+    <a href="index.html">Shop</a>
+    <a href="orders.html">My Orders</a>
+    <button type="button" class="topbar-action" data-logout>Sign out</button>
+  </div>
+</div>
+
+<header class="navbar">
+  <div class="container">
+    <a href="index.html" class="logo">Buy &amp; Bye<span class="brand-byline">by Jasper Clarence</span></a>
+    <div class="nav-icons">
+      <a href="cart.html" class="cart-link" aria-label="Cart">
+        <i data-lucide="shopping-cart"></i>
+        <span class="cart-badge" id="cartBadge">0</span>
+      </a>
+      <a href="orders.html" class="nav-text-link">My Orders</a>
+    </div>
+  </div>
+</header>
+
+<main class="page">
+  <div class="container">
+    <h2 class="section-title">My Profile</h2>
+    <p class="profile-demo-note">Demo profile data is saved only in this browser. Do not store real payment credentials here.</p>
+    <p id="profileUnavailable" class="empty-state" style="display:none;"></p>
+    <!-- Dito nilo-load at sine-save ng script.js ang profile at demo payment details. -->
+    <form id="profileForm" class="panel-section profile-form">
+      <h3>Personal and delivery details</h3>
+      <div class="form-group">
+        <label for="profileName">Full name</label>
+        <input id="profileName" required minlength="2" />
+      </div>
+      <div class="form-group">
+        <label for="profileUsername">Username</label>
+        <input id="profileUsername" readonly />
+      </div>
+      <div class="form-group">
+        <label for="profileContact">Contact number</label>
+        <input id="profileContact" type="tel" />
+      </div>
+      <div class="form-group profile-form-wide">
+        <label for="profileAddress">Default delivery address</label>
+        <textarea id="profileAddress" rows="3"></textarea>
+      </div>
+
+      <h3 class="profile-form-wide">Linked demo card</h3>
+      <p class="profile-form-wide profile-security-note">Only save a fictional cardholder name and last four digits. Never enter a full card number or CVV.</p>
+      <div class="form-group">
+        <label for="profileCardholder">Cardholder name</label>
+        <input id="profileCardholder" autocomplete="off" />
+      </div>
+      <div class="form-group">
+        <label for="profileCardLastFour">Card last four digits</label>
+        <input id="profileCardLastFour" inputmode="numeric" maxlength="4" pattern="[0-9]{4}" placeholder="1234" autocomplete="off" />
+      </div>
+      <button type="button" class="btn btn-outline profile-clear-card" id="clearCardBtn">Remove linked card</button>
+
+      <h3 class="profile-form-wide">Linked demo e-wallet</h3>
+      <p class="profile-form-wide profile-security-note">Do not enter a wallet password, PIN, or verification code.</p>
+      <div class="form-group">
+        <label for="profileWalletProvider">Provider</label>
+        <select id="profileWalletProvider">
+          <option value="">No linked e-wallet</option>
+          <option value="GCash">GCash (demo)</option>
+          <option value="Maya">Maya (demo)</option>
+          <option value="Other e-wallet">Other e-wallet (demo)</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="profileWalletLastFour">Account last four digits</label>
+        <input id="profileWalletLastFour" inputmode="numeric" maxlength="4" pattern="[0-9]{4}" placeholder="5678" autocomplete="off" />
+      </div>
+      <button type="button" class="btn btn-outline profile-clear-wallet" id="clearWalletBtn">Remove linked e-wallet</button>
+
+      <div class="profile-form-wide profile-form-actions">
+        <button type="submit" class="btn btn-primary">Save profile</button>
+        <p id="profileFeedback" role="status" aria-live="polite"></p>
+      </div>
+    </form>
+  </div>
+</main>
+
+<footer class="site-footer">
+  Buy &amp; Bye — a front-end only demo store. Not a real e-commerce platform.
+</footer>
+
+<!-- I-load ang icons, shared data, at profile page behavior. -->
+<script src="https://unpkg.com/lucide@latest"></script>
+<script src="store.js"></script>
+<script src="script.js"></script>
+</body>
+</html>

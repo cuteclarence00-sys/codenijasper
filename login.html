@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Sign In — Buy &amp; Bye</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body class="auth-page">
+  <main class="auth-card">
+    <a href="index.html" class="auth-logo">Buy &amp; Bye<span class="brand-byline">by Jasper Clarence</span></a>
+    <h1>Sign in</h1>
+    <p class="auth-intro" id="authIntro">Sign in to your Buy &amp; Bye account or create a new buyer profile.</p>
+
+    <!-- auth.js ang bahala sa sign in, registration, at form validation. -->
+    <form id="loginForm">
+      <div class="form-group">
+        <label for="username">Username</label>
+        <input id="username" name="username" autocomplete="username" minlength="3" required />
+      </div>
+      <div class="form-group" id="registerNameGroup" style="display:none;">
+        <label for="profileName">Full name</label>
+        <input id="profileName" name="profileName" autocomplete="name" minlength="2" />
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input id="password" name="password" type="password" autocomplete="current-password" minlength="6" required />
+      </div>
+      <div class="form-group" id="confirmPasswordGroup" style="display:none;">
+        <label for="confirmPassword">Confirm password</label>
+        <input id="confirmPassword" name="confirmPassword" type="password" autocomplete="new-password" minlength="6" />
+      </div>
+      <p class="form-error" id="loginError" role="alert">Those credentials do not match this account.</p>
+      <button type="submit" class="btn btn-primary btn-block">Sign in</button>
+    </form>
+
+    <div class="demo-credentials">
+      <strong>Demo credentials</strong>
+      <span>Buyer: buyer / buyer123 · Seller: seller / seller123</span>
+      <span class="auth-storage-note">Demo profiles are stored in this browser only. Do not reuse real passwords.</span>
+    </div>
+    <button type="button" id="authModeToggle" class="auth-mode-toggle">Create a buyer profile</button>
+  </main>
+
+  <!-- I-load ang shared account data, icons, at login/register behavior. -->
+  <script src="store.js"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="auth.js"></script>
+</body>
+</html>

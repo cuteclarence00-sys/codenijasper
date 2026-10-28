@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Checkout — Buy &amp; Bye</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<!-- Buyer navigation: links sa profile, orders, at logout. -->
+<div class="topbar">
+  <div class="container">
+    <a href="orders.html">Track My Orders</a>
+    <a href="account.html">My Profile</a>
+    <button type="button" class="topbar-action" data-logout>Sign out</button>
+  </div>
+</div>
+
+<header class="navbar">
+  <div class="container">
+    <a href="index.html" class="logo">Buy &amp; Bye<span class="brand-byline">by Jasper Clarence</span></a>
+    <form class="search-form" id="searchForm">
+      <input type="text" id="searchInput" placeholder="Search products, brands, and more" autocomplete="off" />
+      <button type="submit" aria-label="Search"><i data-lucide="search"></i></button>
+    </form>
+    <div class="nav-icons">
+      <a href="cart.html" class="cart-link" aria-label="Cart">
+        <i data-lucide="shopping-cart"></i>
+        <span class="cart-badge" id="cartBadge">0</span>
+      </a>
+      <a href="orders.html" class="nav-text-link">My Orders</a>
+    </div>
+  </div>
+</header>
+
+<main class="page">
+  <div class="container">
+    <h2 class="section-title">Checkout</h2>
+
+    <!-- Buyer details, delivery, at payment choices. -->
+    <div id="checkoutContent" style="display:grid; grid-template-columns: 1fr 380px; gap:24px; align-items:start;">
+      <!-- Form para sa buyer info, delivery, at payment setup. -->
+      <form class="form-card" id="checkoutForm" novalidate>
+        <p class="profile-security-note">Your saved profile details are filled in automatically. <a href="account.html">Update your profile</a> to change them.</p>
+        <div class="form-group" id="groupName">
+          <label for="buyerName">Full Name</label>
+          <input type="text" id="buyerName" name="buyerName" placeholder="Juan Dela Cruz" />
+          <div class="form-error">Please enter your full name (at least 2 characters).</div>
+        </div>
+
+        <div class="form-group" id="groupContact">
+          <label for="buyerContact">Contact Number</label>
+          <input type="tel" id="buyerContact" name="buyerContact" placeholder="09XXXXXXXXX" />
+          <div class="form-error">Please enter a valid contact number (7–15 digits).</div>
+        </div>
+
+        <div class="form-group" id="groupAddress">
+          <label for="buyerAddress">Delivery Address</label>
+          <textarea id="buyerAddress" name="buyerAddress" rows="3" placeholder="House No., Street, Barangay, City, Province"></textarea>
+          <div class="form-error">Please enter a complete delivery address (at least 10 characters).</div>
+        </div>
+
+        <div class="form-group paylater-method">
+          <label for="deliveryZone">Delivery area</label>
+          <select id="deliveryZone" name="deliveryZone" required>
+            <option value="metro">Metro Manila</option>
+            <option value="luzon">Rest of Luzon</option>
+            <option value="visayas">Visayas</option>
+            <option value="mindanao">Mindanao</option>
+          </select>
+        </div>
+        <div class="form-group paylater-method">
+          <label for="deliveryCourier">Delivery courier</label>
+          <select id="deliveryCourier" name="deliveryCourier" required>
+            <option value="jnt">J&amp;T Express</option>
+            <option value="spx">SPX Express</option>
+          </select>
+        </div>
+        <div class="delivery-estimate" id="deliveryEstimate" aria-live="polite"></div>
+
+        <div class="form-group paylater-method">
+          <label for="paymentPlan">Payment plan</label>
+          <select id="paymentPlan" name="paymentPlan">
+            <option value="pay-now">Pay now</option>
+            <option value="paylater-3">PayLater — 3 months, 0% interest</option>
+            <option value="paylater-6">PayLater — 6 months, 0.1% monthly interest</option>
+            <option value="paylater-12">PayLater — 12 months, 0.3% monthly interest</option>
+          </select>
+          <p class="paylater-disclaimer">Demo estimate using flat add-on interest per month. No real credit or payment processing.</p>
+        </div>
+
+        <div class="form-group paylater-method">
+          <label for="paymentMethod">Payment method</label>
+          <select id="paymentMethod" name="paymentMethod" required>
+            <option value="">Choose a payment method</option>
+            <option value="cod">Cash on Delivery (COD)</option>
+            <option value="card">Credit / Debit Card</option>
+            <option value="ewallet">E-wallet</option>
+          </select>
+          <p class="payment-method-hint" id="paymentMethodHint" aria-live="polite"></p>
+        </div>
+
+        <div class="payment-link-panel" id="cardLinkPanel" style="display:none;">
+          <h3>Link a demo card</h3>
+          <p>Use fictional details only. Do not enter a real card number or CVV. This demo saves only the last four digits and does not charge the card.</p>
+          <div class="form-group">
+            <label for="cardholderName">Cardholder name</label>
+            <input type="text" id="cardholderName" autocomplete="off" placeholder="Demo cardholder" />
+          </div>
+          <div class="form-group">
+            <label for="cardLastFour">Last four digits</label>
+            <input type="text" id="cardLastFour" inputmode="numeric" maxlength="4" pattern="[0-9]{4}" autocomplete="off" placeholder="1234" />
+          </div>
+        </div>
+
+        <div class="payment-link-panel" id="ewalletLinkPanel" style="display:none;">
+          <h3>Link a demo e-wallet</h3>
+          <p>Use fictional details only. Do not enter a real wallet password, PIN, or verification code. This demo saves only the provider and last four digits.</p>
+          <div class="form-group">
+            <label for="ewalletProvider">E-wallet provider</label>
+            <select id="ewalletProvider">
+              <option value="">Choose a provider</option>
+              <option value="GCash">GCash (demo)</option>
+              <option value="Maya">Maya (demo)</option>
+              <option value="Other e-wallet">Other e-wallet (demo)</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="ewalletLastFour">Account number last four digits</label>
+            <input type="text" id="ewalletLastFour" inputmode="numeric" maxlength="4" pattern="[0-9]{4}" autocomplete="off" placeholder="5678" />
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-block" id="placeOrderBtn">Place Order</button>
+      </form>
+
+      <!-- Order summary at voucher controls; live itong ina-update ng script.js. -->
+      <aside>
+        <div class="order-review" id="orderReview">
+          <h2 style="font-size:16px; margin-bottom:12px;">Order Summary</h2>
+          <div id="orderReviewItems"></div>
+          <form class="voucher-form" id="voucherForm">
+            <label for="voucherCode">Voucher code</label>
+            <div class="voucher-controls">
+              <input type="text" id="voucherCode" placeholder="Enter code" autocomplete="off" />
+              <button type="submit" class="btn btn-outline btn-sm">Apply</button>
+              <button type="button" class="btn btn-outline btn-sm" id="removeVoucherBtn" style="display:none;">Remove</button>
+            </div>
+            <p class="voucher-hint">Enter a voucher code from the seller. One voucher can be used per order.</p>
+            <p class="voucher-feedback" id="voucherFeedback" role="status" aria-live="polite"></p>
+          </form>
+          <div class="order-review-item">
+            <span>Subtotal</span>
+            <span id="orderReviewSubtotal">₱0.00</span>
+          </div>
+          <div class="order-review-item">
+            <span id="orderReviewDeliveryLabel">Delivery fee</span>
+            <span id="orderReviewDeliveryFee">₱0.00</span>
+          </div>
+          <div class="order-review-item" id="orderReviewDiscountRow" style="display:none;">
+            <span id="orderReviewDiscountLabel">Voucher discount</span>
+            <span id="orderReviewDiscount">-₱0.00</span>
+          </div>
+          <div class="order-review-item paylater-interest-row" id="orderReviewInterestRow" style="display:none;">
+            <span>PayLater interest</span>
+            <span id="orderReviewInterest">₱0.00</span>
+          </div>
+          <div class="paylater-installment-preview" id="paylaterInstallmentPreview" style="display:none;">
+            <span id="paylaterPlanLabel"></span>
+            <strong id="paylaterMonthlyAmount"></strong>
+          </div>
+          <div class="order-review-total">
+            <span id="orderReviewTotalLabel">Total</span>
+            <span class="value" id="orderReviewTotal">₱0.00</span>
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <!-- Ipakita ito kung walang laman ang cart at hindi pa puwedeng mag-checkout. -->
+    <div class="empty-state" id="checkoutEmptyState" style="display:none;">
+      <div class="icon"><i data-lucide="shopping-cart"></i></div>
+      <p>Your cart is empty. Add some products before checking out.</p>
+      <br />
+      <a href="index.html" class="btn btn-primary">Browse Products</a>
+    </div>
+  </div>
+</main>
+
+<footer class="site-footer">
+  Buy &amp; Bye — a front-end only demo store. Not a real e-commerce platform.
+</footer>
+
+<!-- I-load ang icons, shared data, at checkout behavior. -->
+<script src="https://unpkg.com/lucide@latest"></script>
+<script src="store.js"></script>
+<script src="script.js"></script>
+</body>
+</html>

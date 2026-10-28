@@ -341,7 +341,10 @@
     const session = getSession();
     if (session && session.role === role) return session;
     const next = `${window.location.pathname}${window.location.search}`;
-    window.location.replace(`login.html?next=${encodeURIComponent(next)}&role=${encodeURIComponent(role)}`);
+    const loginUrl = new URL("login.html", window.location.href);
+    loginUrl.searchParams.set("next", next);
+    loginUrl.searchParams.set("role", role);
+    window.location.replace(loginUrl.href);
     return null;
   }
 

@@ -64,7 +64,14 @@
       return;
     }
 
-    const loggedIn = STORE.login(username, password);
+    let loggedIn = false;
+    try {
+      loggedIn = STORE.login(username, password);
+    } catch (loginError) {
+      console.error("Unable to sign in.", loginError);
+      showError("Unable to save your sign-in in this browser. Please enable site storage and try again.");
+      return;
+    }
     if (!loggedIn) {
       showError("Those credentials do not match an account.");
       return;
@@ -81,10 +88,16 @@
   // Dalhin ang user sa page na dapat niyang puntahan pagkatapos mag-login.
   function navigateAfterLogin(role) {
     const next = params.get("next");
-    const destination = next && next.startsWith("/") && !next.startsWith("//")
-      ? next
-      : role === "seller" ? "seller.html" : "index.html";
-    window.location.replace(destination);
+    const destination = next
+      ? new URL(next, window.location.href)
+      : new URL(role === "seller" ? "seller.html" : "index.html", window.location.href);
+
+    // Keep return links inside this deployment, including GitHub Pages project sites.
+    if (destination.origin !== window.location.origin) {
+      window.location.replace(new URL(role === "seller" ? "seller.html" : "index.html", window.location.href).href);
+      return;
+    }
+    window.location.replace(destination.href);
   }
 
   setMode(registering);
